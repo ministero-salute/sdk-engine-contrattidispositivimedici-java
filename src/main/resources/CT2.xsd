@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:rdm="http://eng.com/rdm/xml/model" targetNamespace="http://eng.com/rdm/xml/model" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<!-- TIPO STRINGA LUNGHEZZA 15 -->
+	<xs:simpleType name="TypeStr15">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="15"/>
+			<xs:pattern value="([^@])*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- TIPO ALLEGATO A -->
+	<xs:simpleType name="TypeAllegatoA">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="010"/>
+			<xs:pattern value="020"/>
+			<xs:pattern value="030"/>
+			<xs:pattern value="041"/>
+			<xs:pattern value="042"/>
+			<xs:pattern value="050"/>
+			<xs:pattern value="060"/>
+			<xs:pattern value="070"/>
+			<xs:pattern value="080"/>
+			<xs:pattern value="090"/>
+			<xs:pattern value="100"/>
+			<xs:pattern value="110"/>
+			<xs:pattern value="120"/>
+			<xs:pattern value="130"/>
+			<xs:pattern value="140"/>
+			<xs:pattern value="150"/>
+			<xs:pattern value="160"/>
+			<xs:pattern value="170"/>
+			<xs:pattern value="180"/>
+			<xs:pattern value="190"/>
+			<xs:pattern value="200"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- TIPO STRINGA LUNGHEZZA 100 -->
+	<xs:simpleType name="TypeStr100">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="100"/>
+			<xs:pattern value="([^@])*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- TIPO STRINGA LUNGHEZZA 40 -->
+	<xs:simpleType name="TypeStr40">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="40"/>
+			<xs:pattern value="([^@])*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- TIPO STRINGA NUMERO REPERTORIO -->
+	<xs:simpleType name="TypeNumRepertorio">
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="13"/>
+			<xs:minInclusive value="1"/>
+			<xs:maxInclusive value="9999999999999"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- TIPO NUMERICO 5 -->
+	<xs:simpleType name="TypeNum5">
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="5"/>
+			<xs:minInclusive value="1"/>
+			<xs:maxInclusive value="99999"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeStr6">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- TYPE IMPORTI -->
+	<xs:simpleType name="TypeImporto">
+		<xs:restriction base="xs:decimal">			
+			<xs:minInclusive value="0.00000"/>
+			<xs:maxInclusive value="99999999.99999"/>			
+     		<xs:pattern value="\d{1,8}([.]\d{1,5})?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- TYPE ALIQUOTA IVA -->
+	<xs:simpleType name="TypeIVA">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="S"/>
+			<xs:pattern value="A"/>
+			<xs:pattern value="M"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- TYPE QUANTITA' -->
+	<!-- TIPO STRINGA LUNGHEZZA 6 -->
+	<xs:simpleType name="TypeQuantita">
+		<xs:restriction base="xs:decimal">		
+			<xs:minInclusive value="0.00"/>
+			<xs:maxInclusive value="999999999999.99"/>
+			<xs:pattern value="\d{1,12}([.]\d{1,2})?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- TYPE NUM PEZZI' -->
+	<xs:simpleType name="TypePezzi">
+		<xs:restriction base="xs:decimal">			
+			<xs:minInclusive value="0.0000"/>
+			<xs:maxInclusive value="999999.9999"/>
+			<xs:pattern value="\d{1,6}([.]\d{1,4})?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- TYPE DURATA -->
+	<xs:simpleType name="TypeDurata">
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="3"/>
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="999"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- TYPE OPERAZIONE-->
+	<xs:simpleType name="TypeOperazione">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="I"/>
+			<xs:pattern value="V"/>
+			<xs:pattern value="C"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- TYPE TIPO DISPOSITIVO -->
+	<xs:simpleType name="TypeDispositivo">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="1"/>
+			<xs:pattern value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- TYPE FLAG -->
+	<xs:simpleType name="TypeFlag">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="SI"/>
+			<xs:pattern value="NO"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- TYPE CIG -->
+	<xs:simpleType name="TypeCig">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="10"/>
+			<xs:pattern value="([^@])*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="dataroot">
+		<xs:complexType>
+			<xs:choice>
+				<xs:element name="REGIONE">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="AS" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="OPERAZIONE" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="CONTRATTO" maxOccurs="unbounded">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="DISPOSITIVO" maxOccurs="unbounded">
+																	<xs:complexType mixed="true">
+																		<xs:attribute name="tipo_dispositivo" type="rdm:TypeDispositivo" use="required"/>
+																		<xs:attribute name="num_rep" type="rdm:TypeNumRepertorio" use="required"/>
+																		<xs:attribute name="prezzo_agg" type="rdm:TypeImporto" use="required"/>
+																		<xs:attribute name="qta_agg" type="rdm:TypeQuantita" use="required"/>
+																		<xs:attribute name="qta_contr" type="rdm:TypeQuantita" use="required"/>
+																		<xs:attribute name="num_pz" type="rdm:TypePezzi" use="optional"/>
+																		<xs:attribute name="den_forn" type="rdm:TypeStr100" use="optional"/>
+																		<xs:attribute name="piva_forn" type="rdm:TypeStr15" use="optional"/>
+																		<xs:attribute name="iva" type="rdm:TypeIVA" use="required"/>
+																		<xs:attribute name="flg_ser_acc" type="rdm:TypeFlag" use="optional"/>
+																		<xs:attribute name="flg_conto_dep" type="rdm:TypeFlag" use="required"/>
+																		<xs:attribute name="progr_riga" type="rdm:TypeNum5" use="optional"/>
+																		<xs:attribute name="cod_mod_ce" type="rdm:TypeStr6" use="optional"/>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+															<xs:attribute name="num_contr" type="rdm:TypeStr40" use="required"/>
+															<xs:attribute name="anno" use="required">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:pattern value="[2][0][0-9]{2}"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+															<xs:attribute name="mese" use="required">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:pattern value="0[1-9]|1[012]"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+															<xs:attribute name="giorno" use="required">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:pattern value="0[1-9]|[12][0-9]|3[01]"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+															<xs:attribute name="durata_contr" type="rdm:TypeDurata" use="required"/>
+															<xs:attribute name="tipo_contr" use="optional">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:enumeration value="CA"/>
+																		<xs:enumeration value="CB"/>
+																		<xs:enumeration value="CC"/>
+																		<xs:enumeration value="CD"/>
+																		<xs:enumeration value="CO"/>
+																		<xs:enumeration value="CS"/>
+																		<xs:enumeration value="LF"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+															<xs:attribute name="forma_neg" use="optional">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:enumeration value="PA"/>
+																		<xs:enumeration value="PR"/>
+																		<xs:enumeration value="PS"/>
+																		<xs:enumeration value="PP"/>
+																		<xs:enumeration value="CF"/>
+																		<xs:enumeration value="AD"/>
+																		<xs:enumeration value="NC"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+															<xs:attribute name="amb_val" use="optional">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:enumeration value="1"/>
+																		<xs:enumeration value="2"/>
+																		<xs:enumeration value="3"/>
+																		<xs:enumeration value="4"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+															<xs:attribute name="cod_cig" type="rdm:TypeCig" use="optional"/>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+												<xs:attribute name="tipo_op" type="rdm:TypeOperazione" use="required"/>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="cod_as" use="required">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:pattern value="[0-9]{6}"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="cod_reg" type="rdm:TypeAllegatoA" use="required"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="CANCELLAZIONE_MASSIVA_DATI">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="REGIONE">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="AS" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="CONTR" minOccurs="0" maxOccurs="unbounded">
+														<xs:complexType>
+															<xs:attribute name="num_contr" type="rdm:TypeStr40" use="required"/>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="PERIODO" minOccurs="0" maxOccurs="unbounded">
+														<xs:complexType>
+															<xs:attribute name="anno" use="required">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:pattern value="[2][0][0-9]{2}"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+															<xs:attribute name="mese" use="required">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:pattern value="0[1-9]|1[012]"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+												<xs:attribute name="cod_as" use="required">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:pattern value="[0-9]{6}"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="cod_reg" type="rdm:TypeAllegatoA" use="required"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
